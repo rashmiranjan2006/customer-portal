@@ -143,9 +143,32 @@
         ];
 
         if (match) {
+          // Header
+          const headerRow = document.createElement("div");
+          headerRow.classList.add("font-bold", "text-black", "mb-2", "uppercase");
+          headerRow.innerText = "Customer Information";
+          customerDetails.appendChild(headerRow);
+
+          // Divider
+          const divider = document.createElement("hr");
+          divider.classList.add("border-t", "border-black", "mb-4");
+          customerDetails.appendChild(divider);
+
+          // Field rows with vertical divider
           fields.forEach(field => {
             const row = document.createElement("div");
-            row.innerHTML = `<strong>${field}:</strong> <span class="text-gray-800">${match[field] || "—"}</span>`;
+            row.className = "flex border-b py-2";
+
+            const label = document.createElement("div");
+            label.className = "w-1/2 font-semibold text-black pr-4 border-r border-gray-300";
+            label.textContent = field;
+
+            const value = document.createElement("div");
+            value.className = "w-1/2 pl-4 text-gray-700";
+            value.textContent = match[field] || "—";
+
+            row.appendChild(label);
+            row.appendChild(value);
             customerDetails.appendChild(row);
           });
         } else {
